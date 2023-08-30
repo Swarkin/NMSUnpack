@@ -84,7 +84,7 @@ with tempfile.TemporaryDirectory(prefix='psarctool-') as temp_dir:
 
 		time.sleep(60)
 	else:
-		print('No .pak files?')
+		print('No .pak files found!')
 
 	for file in paks:
 		print(f'Removing {file}')
