@@ -79,12 +79,9 @@ with tempfile.TemporaryDirectory(prefix='psarctool-') as temp_dir:
 
 	print(f'.pak files: {paks}')
 
-	if paks:
-		subprocess.call([psarctool_path] + paks, stdout=subprocess.DEVNULL)
-
-		time.sleep(60)
-	else:
-		print('No .pak files found!')
+	for file in paks:
+		print(f'Unpacking {file}...')
+		subprocess.Popen([psarctool_path, file], stdout=subprocess.DEVNULL)
 
 	for file in paks:
 		print(f'Removing {file}')
