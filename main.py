@@ -65,19 +65,23 @@ def download_psarctool(url: str, directory: str) -> str:
 
 
 with tempfile.TemporaryDirectory(prefix='psarctool-') as temp_dir:
+	paks = []
+	for file in os.scandir(NMS_PCBANKS_DIR):
+		if file.is_file() and file.name.endswith('.pak'):
+			paks.append(file.path)
+
+	if paks:
+		print(f'Found .pak files: {paks}')
+	else:
+		print('No .pak files found!')
+		exit(1)
+
 	print(f'Downloading PSArcTool to {temp_dir}...')
 	try:
 		psarctool_path = download_psarctool('https://github.com/periander/PSArcTool/raw/master/PSArcTool.zip', temp_dir)
 	except Exception as e:
 		print(f'Failed: {e}')
 		exit(1)
-
-	paks = []
-	for file in os.scandir(NMS_PCBANKS_DIR):
-		if file.is_file() and file.name.endswith('.pak'):
-			paks.append(file.path)
-
-	print(f'.pak files: {paks}')
 
 	for file in paks:
 		print(f'Unpacking {file}...')
