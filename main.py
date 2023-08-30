@@ -82,10 +82,9 @@ with tempfile.TemporaryDirectory(prefix='psarctool-') as temp_dir:
 	if paks:
 		subprocess.call([psarctool_path] + paks, stdout=subprocess.DEVNULL)
 
-		print('Waiting 30s')
-		time.sleep(30)  # 30
-
-	print('No .pak files?')
+		time.sleep(60)
+	else:
+		print('No .pak files?')
 
 	for file in paks:
 		print(f'Removing {file}')
