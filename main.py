@@ -52,7 +52,9 @@ def download_psarctool(url: str, directory: str) -> str:
 	import requests
 
 	r = requests.get(url)
-	print(f'{r.status_code}')
+	if not r.status_code == 200:
+		print(f'The request returned status code {r.status_code}.')
+		exit(1)
 
 	zip_path = os.path.join(directory, 'PSArcTool.zip')
 	with open(zip_path, 'wb') as f:
@@ -89,6 +91,10 @@ with tempfile.TemporaryDirectory(prefix='psarctool-') as temp_dir:
 		print(f'Unpacking {file}...')
 		subprocess.Popen([psarctool_path, file], stdout=subprocess.DEVNULL)
 
+	wait_time = 60
+	print(f'Waiting {wait_time}s to allow all PSArcTool processes to run...')
+	time.sleep(wait_time)
+
 	for file in paks:
 		print(f'Removing {file}')
 		while True:
@@ -96,7 +102,9 @@ with tempfile.TemporaryDirectory(prefix='psarctool-') as temp_dir:
 				os.remove(file)
 				break
 			except PermissionError as e:
-				time.sleep(3)
+				wait_time = 3
+				print(f'{e}: Retrying in {wait_time}s...')
+				time.sleep(wait_time)
 
 	for v in os.scandir(NMS_PCBANKS_DIR):
 		if v.is_dir() or v.name.endswith('.MBIN') or v.name.endswith('.CSV'):
