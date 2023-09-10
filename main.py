@@ -87,6 +87,10 @@ with tempfile.TemporaryDirectory(prefix='psarctool-') as temp_dir:
 		print(f'Unpacking {file}...')
 		subprocess.Popen([psarctool_path, file], stdout=subprocess.DEVNULL)
 
+	wait_time = 60
+	print(f'Waiting {wait_time}s to allow all PSArcTool instances to open...')
+	time.sleep(wait_time)
+
 	for file in paks:
 		print(f'Removing {file}')
 		while True:
