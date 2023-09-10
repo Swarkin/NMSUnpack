@@ -1,7 +1,7 @@
 # NMSUnpack
 
 ## Usage
-Download and run the main.py file.  
+Download and run the main.py file **as admin**.
 If you've changed the installation directory, the script will ask for the new path.
 
 ## How does it work?
