@@ -6,7 +6,6 @@ for arg in ['--help', 'help', '/?']:
 		print("--nms-path \"<path>\" | Override the No Man's Sky install directory (Default: C:\\Program Files (x86)\\Steam\\steamapps\\common\\No Man's Sky)")
 		exit()
 
-import requests
 import subprocess
 import tempfile
 import zipfile
@@ -50,6 +49,8 @@ input(f'\nNMS_DIR: {NMS_DIR}'
 
 
 def download_psarctool(url: str, directory: str) -> str:
+	import requests
+
 	r = requests.get(url)
 	print(f'{r.status_code}')
 
@@ -79,8 +80,9 @@ with tempfile.TemporaryDirectory(prefix='psarctool-') as temp_dir:
 	print(f'Downloading PSArcTool to {temp_dir}...')
 	try:
 		psarctool_path = download_psarctool('https://github.com/periander/PSArcTool/raw/master/PSArcTool.zip', temp_dir)
-	except Exception as e:
-		print(f'Failed: {e}')
+	except ModuleNotFoundError:
+		print('For now, the requests module is required to download PSArcTool.'
+					'Run "pip install requests" to install it and re-run the script.')
 		exit(1)
 
 	for file in paks:
