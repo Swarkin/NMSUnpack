@@ -9,8 +9,6 @@ By unpacking the .pak files in the No Man's Sky installation folder, the CPU ove
 
 Most noticeable is that the lag which normally happens while transitioning to or from a planet has reduced a lot.
 
-[PSArcTool](https://github.com/periander/PSArcTool) is used to unpack the files. While it's not open source, a VirusTotal scan has indicated that it is unlikely to contain any malicious code.
-
 ## FAQ / Troubleshooting
 ### The terminal window closes instantly
 Instead of directly running the script, launch a terminal manually and run `python path/to/main.py` to see the script's output and error message.
