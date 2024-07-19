@@ -1,5 +1,8 @@
 # NMSUnpack
 
+> [!CAUTION]
+> This script is no longer functional since the Worlds Part 1 update, there are conflicting files in the PCBANKS.
+
 ## Usage
 Download and run the main.py file **as admin**.
 If you've changed the installation directory, the script will ask for the new path.
